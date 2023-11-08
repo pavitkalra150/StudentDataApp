@@ -1,20 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
+import HomeScreen from './src/screens/HomeScreen';
+import StudentListScreen from './src/screens/StudentListScreen';
+import { updateStudentData } from './src/components/DataHandler';
+
+
+// Replace this with your actual student data
+const studentsData = [
+  {
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+    major: 'TS101',
+    gpa: 3.8,
+  },
+  {
+    id: 2,
+    firstName: 'Jane',
+    lastName: 'Smith',
+    major: 'CS101',
+    gpa: 3.6,
+  },
+  // Add more student objects as needed
+];
+
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="StudentList" component={StudentListScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
